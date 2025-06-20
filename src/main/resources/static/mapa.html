@@ -55,7 +55,7 @@
       const denuncias = await res.json();
 
       denuncias.forEach(d => {
-        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(d.localizacao)}`)
+		fetch(`/api/geolocalizacao/buscar?q=${encodeURIComponent(d.localizacao)}`)
           .then(resp => resp.json())
           .then(loc => {
             if (loc[0]) {
