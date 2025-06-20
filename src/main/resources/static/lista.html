@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Denúncias - LumiGuard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <!-- Menu de navegação -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">LumiGuard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="denunciar.html">Denunciar</a></li>
+          <li class="nav-item"><a class="nav-link" href="mapa.html">Mapa de Denúncias</a></li>
+          <li class="nav-item"><a class="nav-link" href="risco.html">Consultar Risco</a></li>
+          <li class="nav-item"><a class="nav-link" href="lista.html">Lista de Denúncias</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Lista de Denúncias -->
+  <div class="container">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title">Todas as Denúncias Registradas</h4>
+        <ul id="listaDenuncias" class="list-group"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function carregarLista() {
+      const res = await fetch('/api/denuncias/listar');
+      const dados = await res.json();
+
+      const lista = document.getElementById('listaDenuncias');
+      lista.innerHTML = '';
+
+      dados.forEach(d => {
+        const item = document.createElement('li');
+        item.className = 'list-group-item';
+        item.innerHTML = `<strong>${d.localizacao}</strong> - ${d.tipoFalha} <br><small>${d.descricao}</small>`;
+        lista.appendChild(item);
+      });
+    }
+
+    carregarLista();
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
