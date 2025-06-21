@@ -1,0 +1,16 @@
+@relation denuncias
+
+@attribute bairro {BoaViagem,CasaAmarela,Afogados,Ibura,Outros}
+@attribute prioridade {ALTA,MEDIA,BAIXA}
+
+@data
+BoaViagem,ALTA
+CasaAmarela,MEDIA
+Afogados,ALTA
+Ibura,MEDIA
+BoaViagem,BAIXA
+CasaAmarela,BAIXA
+Outros,MEDIA
+Afogados,ALTA
+Ibura,BAIXA
+Outros,MEDIA
