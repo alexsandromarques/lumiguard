@@ -2,13 +2,9 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa de Denúncias - LumiGuard</title>
+  <title>LumiGuard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>
-    #map { height: 500px; width: 100%; border-radius: 8px; }
-  </style>
 </head>
 <body class="bg-light">
   <!-- Menu de navegação -->
@@ -30,44 +26,15 @@
     </div>
   </nav>
 
-  <!-- Mapa -->
+  <!-- Conteúdo da página inicial -->
   <div class="container">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h4 class="card-title">Mapa de Denúncias</h4>
-        <div id="map"></div>
-      </div>
+    <div class="text-center py-5">
+      <h1 class="display-4">Bem-vindo ao LumiGuard</h1>
+      <p class="lead">Monitore e denuncie falhas na iluminação pública com foco na segurança urbana.</p>
+      <hr class="my-4">
+      <p>Escolha uma opção no menu acima para começar.</p>
     </div>
   </div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map').setView([-8.05224, -34.92861], 12); // Recife como centro
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
-
-    async function carregarDenuncias() {
-      const res = await fetch('/lumiguard/api/denuncias/listar');
-      const denuncias = await res.json();
-
-      denuncias.forEach(d => {
-		fetch(`/lumiguard/api/geolocalizacao/buscar?q=${encodeURIComponent(d.localizacao)}`)
-          .then(resp => resp.json())
-          .then(loc => {
-            if (loc[0]) {
-              L.marker([loc[0].lat, loc[0].lon])
-                .addTo(map)
-                .bindPopup(`<b>${d.localizacao}</b><br>${d.tipoFalha}<br>${d.descricao}`);
-            }
-          });
-      });
-    }
-
-    carregarDenuncias();
-  </script>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

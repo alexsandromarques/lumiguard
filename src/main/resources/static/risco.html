@@ -10,7 +10,7 @@
   <!-- Menu de navegação -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
-      <a class="navbar-brand" href="index.html">LumiGuard</a>
+      <a class="navbar-brand" href="principal.html">LumiGuard</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,7 +18,6 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="denunciar.html">Denunciar</a></li>
           <li class="nav-item"><a class="nav-link" href="mapa.html">Mapa de Denúncias</a></li>
           <li class="nav-item"><a class="nav-link" href="risco.html">Consultar Risco</a></li>
           <li class="nav-item"><a class="nav-link" href="lista.html">Lista de Denúncias</a></li>
@@ -45,7 +44,7 @@
     async function consultarRisco() {
       const local = document.getElementById('campoRisco').value;
       if (!local) return alert("Digite uma localização.");
-      const res = await fetch(`/api/denuncias/risco/${encodeURIComponent(local)}`);
+      const res = await fetch(`/lumiguard/api/denuncias/risco/${encodeURIComponent(local)}`);
       if (res.ok) {
         const nivel = await res.text();
         document.getElementById('riscoResultado').innerText = 'Nível de risco: ' + nivel;
